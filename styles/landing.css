@@ -44,7 +44,20 @@
      -webkit-transition-delay: 0.2s;
      -moz-transition-delay: 0.2s;
      transition-delay: 0.2s;
+     /* added transition */
+     transition-property: font-size;
+     transition-duration: 4s;
+     transition-delay: 2s;
+     font-size: 14px;
  }
+
+/* added transition */
+.point:hover {
+    transition-property: font-size;
+    transition-duration: 4s;
+    transition-delay: 2s;
+    font-size: 36px;
+}
 
  .point .point-title {
      font-size: 1.25rem;
