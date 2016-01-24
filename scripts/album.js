@@ -58,7 +58,7 @@
              $(this).html(playButtonTemplate);
              currentlyPlayingSong = null;
          }
- };
+    };
 
      var onHover = function(event) {
          var songNumberCell = $(this).find('.song-item-number');
@@ -67,7 +67,7 @@
          if (songNumber !== currentlyPlayingSong) {
              songNumberCell.html(playButtonTemplate);
          }
-     };
+    };
 
      var offHover = function(event) {
          var songNumberCell = $(this).find('.song-item-number');
@@ -76,11 +76,15 @@
          if (songNumber !== currentlyPlayingSong) {
              songNumberCell.html(songNumber);
          }
-     };
+    };
+
+    $row.find('.song-item-number').click(clickHandler);
+    $row.hover(onHover, offHover);
 
      $row.find('.song-item-number').click(clickHandler);
      $row.hover(onHover, offHover);
      return $row;
+ };
 
  var setCurrentAlbum = function(album) {
      var $albumTitle = $('.album-view-title');
@@ -94,7 +98,7 @@
      $albumReleaseInfo.text(album.year + ' ' + album.label);
      $albumImage.attr('src', album.albumArtUrl);
 
-     $(albumSongList).empty();
+     $albumSongList.empty();
 
      for (i = 0; i < album.songs.length; i++) {
          var $newRow = createSongRow(i + 1, album.songs[i].name, album.songs[i].length);
@@ -102,13 +106,14 @@
      }
  };
 
+
 var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
 var pauseButtonTemplate = '<a class="album-song-button"><span class="ion-pause"></span></a>';
 
 // Store state of playing songs
 var currentlyPlayingSong = null;
 
- $(window).load(function() {
+ $(document).ready(function() {
      setCurrentAlbum(albumPicasso);
  });
 
