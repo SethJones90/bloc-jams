@@ -1,4 +1,13 @@
- var createSongRow = function(songNumber, songName, songLength) {
+var setSong = function(songNumber) {
+    currentlyPlayingSongNumber = parseInt(sungNumber);
+    currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+}
+
+var getSongNumberCell = function(number) {
+    return $('.song-item-number[data-song-number="' + number + '"]');
+}
+
+var createSongRow = function(songNumber, songName, songLength) {
      var template =
         '<tr class="album-view-song-item">'
       + '  <td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
@@ -12,18 +21,17 @@
      var clickHandler = function() {
          var songNumber = parseInt($(this).attr('data-song-number'));
 
-         if (currentlyPlayingSongNumber !== null) {
+         if (setSong(songNumber) !== null) {
              // Revert to song number for currently playing song because user started playing new song.
-             var currentlyPlayingCell = $('.song-item-number[data-song-number="' + currentlyPlayingSongNumber + '"]');
-             currentlyPlayingCell.html(currentlyPlayingSongNumber);
+             var currentlyPlayingCell = $('.song-item-number[data-song-number="' + setSong(songNumber) + '"]');
+             currentlyPlayingCell.html(setSong(songNumber));
          }
-         if (currentlyPlayingSongNumber !== songNumber) {
+         if (setSong(songNumber) !== songNumber) {
              // Switch from Play -> Pause button to indicate new song is playing.
              $(this).html(pauseButtonTemplate);
-             currentlyPlayingSongNumber = songNumber;
-             currentSongFromAlbum = currentAlbum.songs[songNumber - 1];
+             setSong(songNumber);
              updatePlayerBarSong();
-         } else if (currentlyPlayingSongNumber === songNumber) {
+         } else if (setSong(songNumber) === songNumber) {
              // Switch from Pause -> Play button to pause currently playing song.
              $(this).html(playButtonTemplate);
              $('.main-controls .play-pause').html(playerBarPlayButton);
